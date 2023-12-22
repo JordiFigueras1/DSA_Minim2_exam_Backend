@@ -1,5 +1,6 @@
 package edu.upc.dsa;
 
+import edu.upc.dsa.models.Insignia;
 import edu.upc.dsa.models.Usuario;
 import edu.upc.dsa.models.VOCredenciales;
 import org.apache.log4j.Logger;
@@ -16,6 +17,8 @@ public class JuegoManagerImpl implements JuegoManager {
     private static JuegoManager instance;
     protected List<Usuario> Usuarios;
     protected HashMap<String, Usuario> lUsuarios = new HashMap<String, Usuario>();
+
+    protected HashMap<String, List<Insignia>> Insignias = new HashMap<String, List<Insignia>>();
     final static Logger logger = Logger.getLogger(JuegoManagerImpl.class);
 
     public static JuegoManager getInstance() {
@@ -192,5 +195,10 @@ public class JuegoManagerImpl implements JuegoManager {
             return null; // Retornar null para indicar que el usuario no fue encontrado
         }
     }
-
+    public ArrayList<Insignia> getInsignias(String username){
+        return new ArrayList<>(this.Insignias.get(username));
+    }
+    public void addInsignias(List<Insignia> i, String username){
+        Insignias.put(username, i);
+    }
 }
